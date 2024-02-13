@@ -1,39 +1,59 @@
-// --------------- IMPORTS ---------------
-import { Routes, Route   } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import{useEffect} from "react"
-import ChangeLenguajeAndDarkMode from "./components/PrimaryComponents/ChangeLenguajeAndDarkMode/ChangeLenguajeAndDarkMode"
-import LandingPage from  './components/PrimaryComponents/LandingPage/LandingPage';
+import './App.css'; 
+import { useState, useRef } from "react";
+import BeautyTimer from './time/time';
+import Cube from "./3dLogos/3dNodejs";
+import Winbar from "./winbar/winbar"
+import Status from './Status/status';
+import Consola from "./consola/consola"
 
-// --------------- COMPONENT ---------------
 const App = () => {
-    const user = useSelector((state) =>state.user)
-    const darkmode= useSelector((state) =>state.darkmode)
+  const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    useEffect(() => {
-       
-        // Cambiar el estilo del body aquí
-        document.body.style.backgroundColor = darkmode ? '#000' : '#fff';
-        document.body.style.color = darkmode ? '#fff' : '#000';
-      }, [user, darkmode]);
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false); 
+  const [complete,setcomplete]=useState(false)
+  const audioUrl =
+    "https://res.cloudinary.com/ddectuilp/video/upload/v1707836765/Portafolio/notificacion_l6uuet.mp3";
 
 
-    return (
-        <div>
-          <ChangeLenguajeAndDarkMode></ChangeLenguajeAndDarkMode>
-            <Routes>
-           
-        <Route path="/" element={<LandingPage/>} />
-       
-        </Routes>
 
-             
+  const handlePlayMusic = async () => {
+   if(!isPlaying && !complete){
+        await audioRef.current.play();
+        setIsPlaying(true)
+        setcomplete(true)
+       await wait(4000)
+       setIsPlaying(false)
 
-        </div>
-    )
+    }}
 
+    const handleblur=()=>{
+      setIsPlaying(false)
+    }
+
+
+  return (
+    <div>
+    <div onMouseMove={handlePlayMusic}  className="contain">
+  
+      <Consola    ></Consola>
+      <Cube className="cube"></Cube>
+      <Winbar className="bar" ></Winbar>
+      <audio ref={audioRef} src={audioUrl} />
+
+    </div>
+    {isPlaying && 
+    <div onMouseLeave={handleblur}>
+            <img className="clip" src="https://res.cloudinary.com/ddectuilp/image/upload/v1707836176/Portafolio/clip_f4ugd8.png" alt="Clip"></img>
+            <p className="msj">You can view Projects and download the resume.</p>
+
+
+            </div>
+             }
+             <BeautyTimer></BeautyTimer>
+             <Status></Status>
+    </div>
+  );
 }
 
-
-// --------------- EXPORTS ---------------
 export default App;
