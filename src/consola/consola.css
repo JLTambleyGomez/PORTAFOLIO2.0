@@ -29,7 +29,7 @@
     position: absolute;
     z-index: 99999;
     color: rgb(255, 255, 255);
-    top: 12.7em;
+    top: 22.5%;
     left: 40px;
     font-size: 0.71em;
 }
@@ -44,7 +44,7 @@
     width: 1.1em;
     margin-left: 0.3em;
     position: absolute;
-    top: 9.6em;
+    top: 24.5%;
     height: 1.1em;
 }
 .terminal{
