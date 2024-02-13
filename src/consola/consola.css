@@ -11,6 +11,7 @@
 }
 .console{
     background-color: rgb(9, 26, 20);
+    position: absolute;
     padding: 0.2em;
     width: 40em;
     height: 18em;
@@ -29,7 +30,7 @@
     position: absolute;
     z-index: 99999;
     color: rgb(255, 255, 255);
-    top: 22.5%;
+    top: -12%;
     left: 40px;
     font-size: 0.71em;
 }
@@ -44,7 +45,7 @@
     width: 1.1em;
     margin-left: 0.3em;
     position: absolute;
-    top: 24.5%;
+    top: -7.5%;
     height: 1.1em;
 }
 .terminal{
